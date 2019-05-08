@@ -1,0 +1,14 @@
+<app-spinner *ngIf="loading"></app-spinner>
+<div *ngIf="!loading">
+  <h1>Articles</h1>
+  <div class="grid grid-pad">
+    <div class="box__card" *ngFor="let article of articles; let i = index">
+      <div class="box__card-item">
+        <div class="card__title">{{ article.title }}</div>
+        <div class="card__subtitle">{{ article.subtitle }}, {{ article.publication_date }}</div>
+        <div class="card__content first" [innerHTML]="article.comment"></div>
+        <a class="__button light" routerLink="/article-detail/{{article.id}}">READ MORE >></a>
+      </div>
+    </div>
+  </div>
+</div>

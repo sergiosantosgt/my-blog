@@ -1,0 +1,49 @@
+<app-spinner *ngIf="loading"></app-spinner>
+<h1>New post</h1>
+<div class="__box-form">
+  <div class="form-container">
+    <form #postForm="ngForm" novalidate>
+      <div class="row">
+        <div class="col-25">
+          <label for="title">Title</label>
+        </div>
+        <div class="col-75">
+          <input type="text" id="title" name="title" minlength="4" [(ngModel)]="data.title" #title="ngModel" placeholder="Post title" required>
+        </div>
+        <!-- <p *ngIf="title.invalid || submitted == false">
+          Title, required!
+        </p> -->
+        <div *ngIf="title.invalid && (title.dirty || title.touched)"
+            class="alert alert-danger">
+
+          <div *ngIf="title.errors.required">
+            Name is required.
+          </div>
+          <div *ngIf="title.errors.minlength">
+            Name must be at least 4 characters long.
+          </div>>
+
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-25">
+          <label for="subtitle">Subtitle</label>
+        </div>
+        <div class="col-75">
+          <input type="text" id="subtitle" name="subtitle" [(ngModel)]="data.subtitle" #subtitle="ngModel" placeholder="Post subtitle" required>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-25">
+          <label for="content">Content</label>
+        </div>
+        <div class="col-75">
+          <textarea id="content" name="content" [(ngModel)]="data.content" #content="ngModel" placeholder="Post content" style="height:200px" required></textarea>
+        </div>
+      </div>
+      <div class="row">
+        <input type="submit" (click)="newPost(postForm)" value="Submit">
+      </div>
+    </form>
+  </div>
+</div>

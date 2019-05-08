@@ -1,0 +1,14 @@
+<app-spinner *ngIf="loading"></app-spinner>
+<div *ngIf="article">
+  <h1>Article {{ article_id }}</h1>
+  <div class="grid grid-pad">
+    <div class="box__card">
+      <div class="box__card-item">
+        <div class="card__title">{{ article.title }}</div>
+        <div class="card__subtitle">{{ article.subtitle }}, {{ article.publication_date }}</div>
+        <div class="card__content" [innerHTML]="article.comment"></div>
+        <a class="__button light" routerLink="/article-list/">BACK TO LIST << </a>
+      </div>
+    </div>
+  </div>
+</div>

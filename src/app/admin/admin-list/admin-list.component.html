@@ -1,0 +1,40 @@
+<app-spinner *ngIf="loading"></app-spinner>
+<h1>Admin list</h1>
+<div class="__table-gen">
+  <div class="box__flex-end">
+    <a routerLink="/admin-post-new" class="__button success small">NEW</a>
+  </div>
+  <div class="wrapper">
+    <div class="table table--5cols table--collapse">
+      <div class="table-row table-row--head">
+        <div class="table-cell col-1 column-heading">{{ table_heading.h1 }}</div>
+        <div class="table-cell col-2 column-heading">{{ table_heading.h2 }}</div>
+        <div class="table-cell col-3 column-heading">{{ table_heading.h3 }}</div>
+        <div class="table-cell col-4 column-heading">{{ table_heading.h4 }}</div>
+      </div>
+      <div class="table-row" *ngFor="let article of articles; let i = index">
+        <div class="table-cell col-1">
+          <div class="table-cell--heading">{{ table_heading.h1 }}</div>
+          <div class="table-cell--content"><span class="webinar-date">{{ article.publication_date }}</span></div>
+        </div>
+        <div class="table-cell col-2">
+          <div class="table-cell--content">{{ article.title }}</div>
+        </div>
+        <div class="table-cell col-3">
+          <div class="table-cell--heading">{{ table_heading.h3 }}</div>
+          <div class="table-cell--content">{{ article.subtitle }}</div>
+        </div>
+        <div class="table-cell col-4">
+          <div class="table-cell--heading">{{ table_heading.h4 }}</div>
+          <div class="table-cell--content">       
+              <div>
+                <a class="__button small light">Edit</a>
+                <a class="__button small danger">Del</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
