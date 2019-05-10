@@ -32,12 +32,12 @@ export class AdminPostNewComponent implements OnInit {
     this.alert.message = '';
     this.loading = true;
     this.postService.newPost(this.data).subscribe(res => {
-      this.loading = false;
       this.data = [];
       this.alert.message = 'Post created successfully!';
       setTimeout(()=>{
+        this.loading = false;
         this.router.navigateByUrl('/admin-list'); 
-      }, 3000);
+      }, 2500);
     }, err => {
       this.loading = false;
     });

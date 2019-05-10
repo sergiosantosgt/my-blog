@@ -52,11 +52,11 @@ export class AdminPostEditComponent implements OnInit {
     this.alert.message = "";
     this.loading = true;
     this.postService.editPost(this.post_id, this.data).subscribe(res => {
-      this.loading = false;
       this.alert.message = "Data edited successfully.";
       setTimeout(()=>{
+        this.loading = false;
         this.router.navigateByUrl('/admin-list'); 
-      }, 3000);
+      }, 2000);
     }, err => {
       this.loading = false;
     });
