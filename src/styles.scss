@@ -517,7 +517,11 @@ body.modal-open {
     padding: 2rem 1.5rem;
     min-height: 125px;
     height: min-content;
-    max-height: 400px;
+    height: -webkit-min-content;
+    height: -moz-min-content;
+    height: min-content;
+    max-height: 250px;
+    transition: top .25s ease;
 }
 
 .modal__close {
