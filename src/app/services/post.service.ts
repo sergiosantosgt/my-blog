@@ -16,39 +16,68 @@ export class PostService {
 
   constructor(
     private http: HttpClient,
-    private generalDataService: GeneralDataService,
+    private generalService: GeneralDataService,
     ) { }
   
-  getArticles(): Observable<Post[]> {
-    return this.http.get<Post[]>(this.apiUrl+'/posts', { headers: this.generalDataService.getHeaders() });
-  } 
-
-  getArticle(id): Observable<Post[]> {
-    return this.http.get<Post[]>(this.apiUrl+'/posts/' + id, { headers: this.generalDataService.getHeaders() });
+  getPosts(): Observable<Post[]> {
+    return this.http.get<Post[]>(
+      this.apiUrl+'/posts?_sort=id&_order=desc', 
+      { headers: this.generalService.getHeaders() }
+    );
   }
 
-  newPost(data): Observable<Post[]> {
-    console.log(data);
-    return this.http.post<Post[]>(
-      this.apiUrl+'/posts',
-      {
-        // title: data.title,
-        // subtitle: data.subtitle,
-        // content: data.content
-      },
-      { headers: this.generalDataService.getHeaders() }
+  filterPosts(page, limit, search): Observable<Post[]> {
+    search = (search && typeof search != "undefined") ? '&q=' + search : '';
+    return this.http.get<Post[]>(
+      this.apiUrl+'/posts?_sort=id&_order=desc&_page=' + page + '&_limit=' + limit + search, 
+      { headers: this.generalService.getHeaders() }
     );
   } 
 
-  // search(term: string): Observable<Post[]> {
-  //   // let apiURL = `${this.apiRoot}?term=${term}&media=music&limit=20`;
-  //   return this.http.get(this.apiUrl+'/posts').pipe(
-  //     map(res => {
-  //       return res.results.map(item => {
-  //         return new Post(
-  //         );
-  //       });
-  //     })
-  //   );
-  // }
+  getPost(id): Observable<Post[]> {
+    return this.http.get<Post[]>(
+      this.apiUrl+'/posts/' + id, 
+      { headers: this.generalService.getHeaders() }
+    );
+  }
+
+  getTotalPosts(): Observable<any> {
+    return this.http.get(
+      this.apiUrl+'/posts', 
+      { headers: this.generalService.getHeaders() }
+    );
+  }
+
+  newPost(data): Observable<Post[]> {
+    return this.http.post<Post[]>(
+      this.apiUrl+'/posts',
+      {
+        publication_date: this.generalService.yyyymmdd(),
+        title: data.title.toUpperCase(),
+        subtitle: data.subtitle,
+        content: this.generalService.formatTextArea(data.content)
+      },
+      { headers: this.generalService.getHeaders() }
+    );
+  }
+
+  editPost(id, data): Observable<Post[]> {
+    return this.http.put<Post[]>(
+      this.apiUrl+'/posts/' + id,
+      {
+        publication_date: data.publication_date,
+        title: data.title.toUpperCase(),
+        subtitle: data.subtitle,
+        content: this.generalService.formatTextArea(data.content)
+      },
+      { headers: this.generalService.getHeaders() }
+    );
+  }
+
+  deletePost(id): Observable<Post[]> {
+    return this.http.delete<Post[]>(
+      this.apiUrl+'/posts/' + id,
+      { headers: this.generalService.getHeaders() }
+    );
+  }
 }

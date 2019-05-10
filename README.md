@@ -1,5 +1,15 @@
 # MyBlog
 
+## Running json-server
+
+Run `npm install -g json-server` to install json-server
+
+Run `json-server --watch BLOG_DB.json` in directory `json-server`
+
+## Running Angular project
+
+Run `npm install` to install dependencies
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.2.3.
 
 ## Development server

@@ -15,6 +15,10 @@ import { ArticleDetailComponent } from './article-detail/article-detail.componen
 import { SpinnerComponent } from './components/spinner/spinner.component';
 import { AdminListComponent } from './admin/admin-list/admin-list.component';
 import { AdminPostNewComponent } from './admin/admin-post-new/admin-post-new.component';
+import { AdminPostEditComponent } from './admin/admin-post-edit/admin-post-edit.component';
+import { PaginationComponent } from './components/pagination/pagination.component';
+import { AdminPostReadComponent } from './admin/admin-post-read/admin-post-read.component';
+import { ModalComponent } from './components/modal/modal.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +29,11 @@ import { AdminPostNewComponent } from './admin/admin-post-new/admin-post-new.com
     ArticleDetailComponent,
     SpinnerComponent,
     AdminListComponent,
-    AdminPostNewComponent
+    AdminPostNewComponent,
+    AdminPostEditComponent,
+    PaginationComponent,
+    AdminPostReadComponent,
+    ModalComponent
   ],
   imports: [
     BrowserModule,

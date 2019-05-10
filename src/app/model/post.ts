@@ -3,5 +3,5 @@ export class Post {
   title: string;
   subtitle: string;
   publication_date: string;
-  comment: string;
+  content: string;
 }

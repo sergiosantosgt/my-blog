@@ -1,13 +1,16 @@
 <app-spinner *ngIf="loading"></app-spinner>
 <div *ngIf="article">
-  <h1>Article {{ article_id }}</h1>
+  <h1>Article {{ post_id }}</h1>
   <div class="grid grid-pad">
     <div class="box__card">
       <div class="box__card-item">
         <div class="card__title">{{ article.title }}</div>
-        <div class="card__subtitle">{{ article.subtitle }}, {{ article.publication_date }}</div>
-        <div class="card__content" [innerHTML]="article.comment"></div>
-        <a class="__button light" routerLink="/article-list/">BACK TO LIST << </a>
+        <div class="card__subtitle">
+          {{ article.subtitle }}, 
+          <div class="text__light">{{ article.publication_date | date: 'MMMM d, yyyy' }}</div>
+        </div>
+        <div class="card__content" [innerHTML]="article.content"></div>
+        <div><a class="__button gray" routerLink="/article-list/"><img class="arrow__icon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAaCAYAAACpSkzOAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAACFSURBVEhL7ZQxCoQwEABzgr7Bwn/Y+gw7v3Stj7pOELT1C3aCznIJhHDX7d4VZmDIss1UG5f5NQ9s36MdEhnxwF4WFoTI6TWJpZHgjBWq8C2yYIMq/DWyYo585IlpZEPViNDhjnFIbmZAdXJMhXvFJixRnTgmP3eNZkjshaaRQOHfjCXOXb6nV3TH4PDmAAAAAElFTkSuQmCC"> BACK</a>
       </div>
     </div>
   </div>

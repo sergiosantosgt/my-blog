@@ -1,40 +1,80 @@
 <app-spinner *ngIf="loading"></app-spinner>
-<h1>Admin list</h1>
-<div class="__table-gen">
-  <div class="box__flex-end">
-    <a routerLink="/admin-post-new" class="__button success small">NEW</a>
-  </div>
-  <div class="wrapper">
-    <div class="table table--5cols table--collapse">
-      <div class="table-row table-row--head">
-        <div class="table-cell col-1 column-heading">{{ table_heading.h1 }}</div>
-        <div class="table-cell col-2 column-heading">{{ table_heading.h2 }}</div>
-        <div class="table-cell col-3 column-heading">{{ table_heading.h3 }}</div>
-        <div class="table-cell col-4 column-heading">{{ table_heading.h4 }}</div>
+<div>
+  <h1 *ngIf="!loading">Admin list</h1>
+  <div *ngIf="alert.message" class="box__alert">{{ alert?.message }}</div>
+  <div class="__table-gen">
+    <div class="wrapper">
+      <div class="box__flex-space-between">
+        <div><input class="input__search" type="text" id="search" name="search" (keyup)="getPosts()" [(ngModel)]="data.search" #search="ngModel" placeholder="Search a post..." /></div>
+        <div><a routerLink="/admin-post-new" class="__button success">New</a></div>
       </div>
-      <div class="table-row" *ngFor="let article of articles; let i = index">
-        <div class="table-cell col-1">
-          <div class="table-cell--heading">{{ table_heading.h1 }}</div>
-          <div class="table-cell--content"><span class="webinar-date">{{ article.publication_date }}</span></div>
-        </div>
-        <div class="table-cell col-2">
-          <div class="table-cell--content">{{ article.title }}</div>
-        </div>
-        <div class="table-cell col-3">
-          <div class="table-cell--heading">{{ table_heading.h3 }}</div>
-          <div class="table-cell--content">{{ article.subtitle }}</div>
-        </div>
-        <div class="table-cell col-4">
-          <div class="table-cell--heading">{{ table_heading.h4 }}</div>
-          <div class="table-cell--content">       
-              <div>
-                <a class="__button small light">Edit</a>
-                <a class="__button small danger">Del</a>
+      <div *ngIf="!loading && articles.length">
+        <div class="table table--5cols table--collapse">
+          <div class="table-row table-row--head">
+            <div class="table-cell col-1 column-heading">{{ table_heading.h1 }}</div>
+            <div class="table-cell col-2 column-heading">{{ table_heading.h2 }}</div>
+            <div class="table-cell col-3 column-heading">{{ table_heading.h3 }}</div>
+            <div class="table-cell col-4 column-heading">{{ table_heading.h4 }}</div>
+          </div>
+          <div class="table-row" *ngFor="let article of articles; let i = index">
+            <div class="table-cell col-1">
+              <div class="table-cell--heading">{{ table_heading.h1 }}</div>
+              <div class="table-cell--content center">{{ article.publication_date | date: 'MM/dd/yyyy' }}</div>
+            </div>
+            <div class="table-cell col-2">
+              <div class="table-cell--content top">{{ article.title }}</div>
+            </div>
+            <div class="table-cell col-3">
+              <div class="table-cell--heading">{{ table_heading.h3 }}</div>
+              <div class="table-cell--content">{{ article.subtitle }}</div>
+            </div>
+            <div class="table-cell col-4">
+              <div class="table-cell--heading">{{ table_heading.h4 }}</div>
+              <div class="table-cell--content center">       
+                  <div>
+                    <a class="__button small light margin-r" routerLink="/admin-post-read/{{article.id}}">Read</a>
+                    <a class="__button small warning margin-r" routerLink="/admin-post-edit/{{article.id}}">Edit</a>
+                    <label class="__button small danger margin-r" (click)="deleteModal(article.id)" for="modal-delete">Del</label>
+                </div>
+              </div>
             </div>
           </div>
         </div>
+        <my-pagination
+          (goPage)="goToPage($event)"
+          (goNext)="onNext()"
+          (goPrev)="onPrev()"
+          [pagesToShow]="3"
+          [page]="page"
+          [perPage]="limit"
+          [count]="total">
+        </my-pagination>
+      </div>
+      <div *ngIf="!loading && !articles.length" class="no__content-display">
+          No posts found :(
+      </div>
+      <div [hidden]="!articles.length" class="pag__select">
+        <p>Quantity items</p>
+        <select (change)="selectPagLimit($event)">
+          <option value="5">5</option>
+          <option value="10">10</option>
+          <option value="15">20</option>
+        </select>
       </div>
     </div>
   </div>
+</div>
+
+<input class="modal-state" id="modal-delete" type="checkbox" (change)="modalChange()"/>
+<div class="modal">
+    <label class="modal__bg" for="modal-delete"></label>
+    <div class="modal__inner">
+        <label class="modal__close" for="modal-delete"></label>
+        <h2>Do you really want to delete post {{ post.delete_id }}?</h2>
+        <div class="box__flex-end">
+            <label class="__button small danger margin-r" for="modal-delete" (click)="deletePost(post.delete_id)">YES</label>
+            <label class="__button small light margin-r" for="modal-delete">NO</label>
+        </div>
+    </div>
 </div>
 

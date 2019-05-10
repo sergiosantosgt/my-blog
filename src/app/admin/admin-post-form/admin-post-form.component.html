@@ -1,0 +1,65 @@
+<app-spinner *ngIf="loading"></app-spinner>
+<div *ngIf="!loading">
+  <h1>{{ title_text }} post {{ post_id }}</h1>
+  <div *ngIf="alert.message" class="box__alert">{{ alert?.message }}</div>
+  <div class="__box-form">
+    <div class="form-container">
+      <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+        <div class="row">
+          <div class="col-10">
+            <label for="title">* Title</label>
+          </div>
+          <div class="col-90">
+            <input type="text" id="title" name="title" minlength="4" maxlength="40" [(ngModel)]="data.title" #title="ngModel" placeholder="Post title" required>
+            <div *ngIf="(f.submitted && title.invalid) || (title.invalid && (title.dirty || title.touched))" class="msg__error">
+                <div *ngIf="title.errors.required">Title is required</div>
+                <div *ngIf="title.errors.minlength">Title must be at least 4 characters</div>
+                <div *ngIf="title.errors.maxlenght">Title can not be longer than 40 characters</div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-10">
+            <label for="subtitle">* Subtitle</label>
+          </div>
+          <div class="col-90">
+            <input type="text" id="subtitle" name="subtitle" maxlength="60" [(ngModel)]="data.subtitle" #subtitle="ngModel" placeholder="Post subtitle" required>
+            <div *ngIf="(f.submitted && subtitle.invalid) || (subtitle.invalid && (subtitle.dirty || subtitle.touched))" class="msg__error">
+                <div *ngIf="subtitle.errors.required">Subtitle is required</div>
+                <div *ngIf="subtitle.errors.maxlenght">Subtitle can not be longer than 60 characters</div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-10">
+            <label for="content">* Content</label>
+          </div>
+          <div class="col-90">
+            <textarea id="content" name="content" [(ngModel)]="data.content" #content="ngModel" placeholder="Post content" style="height:200px" required></textarea>
+            <div *ngIf="(f.submitted && content.invalid) || (content.invalid && (content.dirty || content.touched))" class="msg__error">
+                <div *ngIf="content.errors.required">Content is required</div>
+            </div>
+          </div>
+          
+        </div>
+        <div class="box__flex-end mt10">
+          <button class="__button success large full margin-r" [disabled]="!f.form.valid">{{ button_text }}</button>
+          <a class="__button light small" routerLink="/admin-list/">Cancel</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<input class="modal-state" id="modal-edit" type="checkbox" (change)="modalChange()"/>
+<div class="modal">
+    <label class="modal__bg" for="modal-edit"></label>
+    <div class="modal__inner">
+        <label class="modal__close" for="modal-edit"></label>
+        <h2>Do you really want to edit post {{ post_id }}?</h2>
+        <div class="box__flex-end">
+            <label class="__button small success margin-r" for="modal-edit" (click)="editPost(post_id)">YES</label>
+            <label class="__button small light margin-r" for="modal-edit">NO</label>
+        </div>
+    </div>
+</div>

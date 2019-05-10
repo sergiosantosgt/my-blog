@@ -1,0 +1,12 @@
+<input class="modal-state" id="modal-delete" type="checkbox"/>
+<div class="modal">
+    <label class="modal__bg" for="modal-delete"></label>
+    <div class="modal__inner">
+        <label class="modal__close" for="modal-delete"></label>
+        <h2>Do you really want to delete post {{ post.delete_id }}?</h2>
+        <div class="box__flex-end">
+            <label class="__button small danger margin-r" for="modal-delete" (click)="onDelete()">YES</label>
+            <label class="__button small light margin-r" for="modal-delete">NO</label>
+        </div>
+    </div>
+</div>

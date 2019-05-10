@@ -14,12 +14,12 @@ export class ArticleListComponent implements OnInit {
   constructor(private postService: PostService) { }
 
   ngOnInit() {
-    this.getArticles();
+    this.getPosts();
   }
 
-  getArticles(): void {
+  getPosts(): void {
     this.loading = true;
-    this.postService.getArticles().subscribe(res => 
+    this.postService.getPosts().subscribe(res => 
     {   
       this.articles = res;
       this.loading = false;

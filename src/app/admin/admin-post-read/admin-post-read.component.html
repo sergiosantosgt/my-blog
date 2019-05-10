@@ -1,0 +1,23 @@
+<app-spinner *ngIf="loading"></app-spinner>
+<div *ngIf="article">
+  <h1>Article {{ post_id }}</h1>
+  <div *ngIf="alert.message" class="box__alert">{{ alert?.message }}</div>
+  <div class="box__flex-end">
+    <div><a routerLink="/admin-post-edit/{{ post_id }}" class="__button warning margin-r">Edit</a></div>
+    <div><label class="__button danger margin-r" for="modal-delete">Delete</label></div>
+  </div>
+  <div class="grid grid-pad">
+    <div class="box__card">
+      <div class="box__card-item">
+        <div class="card__title">{{ article.title }}</div>
+        <div class="card__subtitle">
+          {{ article.subtitle }}, 
+          <div class="text__light">{{ article.publication_date | date: 'MMMM d, yyyy' }}</div>
+        </div>
+        <div class="card__content" [innerHTML]="article.content"></div>
+        <div><a class="__button gray" routerLink="/admin-list/"><img class="arrow__icon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAaCAYAAACpSkzOAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAACFSURBVEhL7ZQxCoQwEABzgr7Bwn/Y+gw7v3Stj7pOELT1C3aCznIJhHDX7d4VZmDIss1UG5f5NQ9s36MdEhnxwF4WFoTI6TWJpZHgjBWq8C2yYIMq/DWyYo585IlpZEPViNDhjnFIbmZAdXJMhXvFJixRnTgmP3eNZkjshaaRQOHfjCXOXb6nV3TH4PDmAAAAAElFTkSuQmCC"> BACK</a>
+      </div>
+    </div>
+  </div>
+</div>
+<app-modal [post]="post" (goDelete)="deletePost($event)"></app-modal>

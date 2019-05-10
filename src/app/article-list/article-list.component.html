@@ -5,10 +5,16 @@
     <div class="box__card" *ngFor="let article of articles; let i = index">
       <div class="box__card-item">
         <div class="card__title">{{ article.title }}</div>
-        <div class="card__subtitle">{{ article.subtitle }}, {{ article.publication_date }}</div>
-        <div class="card__content first" [innerHTML]="article.comment"></div>
-        <a class="__button light" routerLink="/article-detail/{{article.id}}">READ MORE >></a>
+        <div class="card__subtitle">
+          {{ article.subtitle }}, 
+          <div class="text__light">{{ article.publication_date | date: 'MMMM d, yyyy' }}</div>
+        </div>
+        <div class="card__content first" [innerHTML]="article.content"></div>
+        <a class="__button gray" routerLink="/article-detail/{{article.id}}"><img class="arrow__icon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAC5SURBVGhD7dcxCgIxFIThWHoXK/EsYreNd7H0mIKVBxDdeeKDEJ5rO7PMD8OyXb4uac4559D2+5Vuh92w4+dPtEDcsTf2xCQxPSInh6kQcpglRE4CM2EvrAL0k8CcMWMYM4Y1Y1gzhjVjWFsV5oJVhx8XmD1G2QF7YNXBx12xDUaXESwZwZIRLBnBkhEsrQIRxS01LnjVwftRI7ITtoSRQGS/MFKIbMRIIrLESCOyeNnJI5xzzv2ptRlzJENeylweVQAAAABJRU5ErkJggg=="> READ MORE</a>
       </div>
+    </div>
+    <div *ngIf="!loading && !articles.length" class="no__content-display">
+      No posts found :(
     </div>
   </div>
 </div>

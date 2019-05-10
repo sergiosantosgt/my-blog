@@ -10,7 +10,7 @@ import { PostService } from '../services/post.service';
 })
 export class ArticleDetailComponent implements OnInit {
   
-  article_id: string = '';
+  post_id: string = '';
   article: any = [];
   loading: boolean = false;
 
@@ -19,16 +19,16 @@ export class ArticleDetailComponent implements OnInit {
     private route: ActivatedRoute,
     private postService: PostService
   ) { 
-    this.article_id = this.route.snapshot.paramMap.get('article_id');
+    this.post_id = this.route.snapshot.paramMap.get('post_id');
   }
 
   ngOnInit() {
-    this.getPosts();
+    this.getPost();
   }
 
-  getPosts(): void {
+  getPost(): void {
     this.loading = true;
-    this.postService.getArticle(this.article_id).subscribe(res => 
+    this.postService.getPost(this.post_id).subscribe(res => 
     {   
       this.article = res;
       this.loading = false;
@@ -36,7 +36,6 @@ export class ArticleDetailComponent implements OnInit {
       console.log(err);
       this.loading = false;
     });
-
   }
 
 }
