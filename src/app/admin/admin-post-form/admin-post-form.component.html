@@ -20,12 +20,12 @@
         </div>
         <div class="row">
           <div class="col-10">
-            <label for="subtitle">* Subtitle</label>
+            <label for="subtitle">Subtitle</label>
           </div>
           <div class="col-90">
-            <input type="text" id="subtitle" name="subtitle" maxlength="60" [(ngModel)]="data.subtitle" #subtitle="ngModel" placeholder="Post subtitle" required>
+            <input type="text" id="subtitle" name="subtitle" maxlength="60" [(ngModel)]="data.subtitle" #subtitle="ngModel" placeholder="Post subtitle">
             <div *ngIf="(f.submitted && subtitle.invalid) || (subtitle.invalid && (subtitle.dirty || subtitle.touched))" class="msg__error">
-                <div *ngIf="subtitle.errors.required">Subtitle is required</div>
+                <!-- <div *ngIf="subtitle.errors.required">Subtitle is required</div> -->
                 <div *ngIf="subtitle.errors.maxlenght">Subtitle can not be longer than 60 characters</div>
             </div>
           </div>
