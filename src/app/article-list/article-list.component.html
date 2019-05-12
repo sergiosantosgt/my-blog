@@ -6,7 +6,7 @@
       <div class="box__card-item">
         <div class="card__title">{{ article.title }}</div>
         <div class="card__subtitle">
-          {{ article.subtitle }}, 
+          <span *ngIf="article.subtitle">{{ article.subtitle }}, </span> 
           <div class="text__light">{{ article.publication_date | date: 'MMMM d, yyyy' }}</div>
         </div>
         <div class="card__content first" [innerHTML]="article.content"></div>
