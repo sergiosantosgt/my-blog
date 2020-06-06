@@ -31,6 +31,9 @@ export class AdminPostNewComponent implements OnInit {
   onSubmit() {
     this.alert.message = '';
     this.loading = true;
+    this.data.postCategorias = {
+      id: 1
+    }
     this.postService.newPost(this.data).subscribe(res => {
       this.data = [];
       this.alert.message = 'Post created successfully!';

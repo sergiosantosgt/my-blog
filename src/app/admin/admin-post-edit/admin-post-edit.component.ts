@@ -51,6 +51,13 @@ export class AdminPostEditComponent implements OnInit {
   editPost() {
     this.alert.message = "";
     this.loading = true;
+    this.data.postCategorias = [
+      {
+        id: 1
+      }
+    ]
+    console.log(this.data);
+    
     this.postService.editPost(this.post_id, this.data).subscribe(res => {
       this.alert.message = "Data edited successfully.";
       setTimeout(()=>{

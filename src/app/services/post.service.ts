@@ -55,7 +55,8 @@ export class PostService {
         publication_date: this.generalService.yyyymmdd(),
         title: data.title.toUpperCase(),
         subtitle: data.subtitle,
-        content: this.generalService.formatTextArea(data.content)
+        content: this.generalService.formatTextArea(data.content),
+        postCategorias: data.postCategorias
       },
       { headers: this.generalService.getHeaders() }
     );
@@ -68,7 +69,8 @@ export class PostService {
         publication_date: data.publication_date,
         title: data.title.toUpperCase(),
         subtitle: data.subtitle,
-        content: this.generalService.formatTextArea(data.content)
+        content: this.generalService.formatTextArea(data.content),
+        postCategorias: data.postCategorias
       },
       { headers: this.generalService.getHeaders() }
     );
